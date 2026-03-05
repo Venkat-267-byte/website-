@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony | Premium Dining Experience</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>Symphony</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">Our Story</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="authBtn" class="btn btn-outline"><i class="fa-regular fa-user"></i> Sign In</button>
+                <button id="cartBtn" class="cart-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cartCount" class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title">Culinary Artistry <br> Delivered to You.</h2>
+                <p class="hero-subtitle">Experience the finest South and North Indian cuisine crafted by master chefs.
+                </p>
+                <a href="#menu" class="btn btn-primary">Explore Menu</a>
+            </div>
+        </section>
+
+        <!-- Menu Section structure (to be populated dynamically) -->
+        <section id="menu" class="menu-section">
+            <div class="section-header">
+                <h2>Our Menu</h2>
+                <p>Curated selections for every palate.</p>
+            </div>
+
+            <div class="menu-categories" id="menuCategories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="Breakfast">Breakfast</button>
+                <button class="category-btn" data-category="Lunch">Lunch</button>
+                <button class="category-btn" data-category="Dinner">Dinner</button>
+                <button class="category-btn" data-category="Snacks">Snacks</button>
+            </div>
+
+            <div class="region-filters" id="regionFilters">
+                <label class="filter-label"><input type="radio" name="region" value="all" checked> All</label>
+                <label class="filter-label"><input type="radio" name="region" value="South Indian"> South Indian</label>
+                <label class="filter-label"><input type="radio" name="region" value="North Indian"> North Indian</label>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu Cards will be injected here by app.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button id="closeCart" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart Items injected here -->
+            <div class="empty-cart-msg">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">₹0</span>
+            </div>
+            <div class="summary-line">
+                <span>Taxes (5%)</span>
+                <span id="cartTax">₹0</span>
+            </div>
+            <div class="summary-line total">
+                <span>Total</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button id="checkoutBtn" class="btn btn-primary btn-block" disabled>Checkout securely</button>
+        </div>
+    </aside>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="auth-box">
+                <h3 id="authTitle">Sign In</h3>
+                <p class="auth-subtitle" id="authSubtitle">Welcome back to Symphony.</p>
+                <form id="authForm">
+                    <div class="input-group" id="nameGroup" style="display: none;">
+                        <label for="userName">Full Name</label>
+                        <input type="text" id="userName" placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label for="userEmail">Email Address</label>
+                        <input type="email" id="userEmail" required placeholder="john@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="userPassword">Password</label>
+                        <input type="password" id="userPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" id="authSubmitBtn">Sign In</button>
+                </form>
+                <div class="auth-switch">
+                    <span id="authSwitchText">Don't have an account?</span>
+                    <button type="button" id="authSwitchBtn" class="btn-text">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile & Order History Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-content modal-lg">
+            <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="profile-box">
+                <h3>My Profile</h3>
+                <div class="profile-info">
+                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="details">
+                        <h4 id="profileName">User Name</h4>
+                        <p id="profileEmail">user@example.com</p>
+                        <button id="logoutBtn" class="btn btn-outline btn-sm mt-2">Sign Out</button>
+                    </div>
+                </div>
+
+                <div class="order-history-section mt-4">
+                    <h4>Order History</h4>
+                    <div class="orders-list" id="ordersList">
+                        <!-- Orders injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Razorpay Checkput Script Mock Note: Real one would be https://checkout.razorpay.com/v1/checkout.js -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script src="history.js"></script>
+</body>
+
+</html>
