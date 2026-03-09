@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Flavours — Where Tradition Meets Fire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- ══════════════════════════
+     3D INTRO SPLASH
+══════════════════════════ -->
+<div id="intro">
+  <div class="intro-scene">
+
+    <!-- Background glow particles -->
+    <div class="i-particle" style="width:280px;height:280px;top:10%;left:15%;background:radial-gradient(circle,rgba(255,140,0,.12),transparent 65%);--dur:5s;--del:0s;--tx:20px;--ty:-30px"></div>
+    <div class="i-particle" style="width:200px;height:200px;bottom:20%;right:12%;background:radial-gradient(circle,rgba(255,69,0,.1),transparent 65%);--dur:7s;--del:-2s;--tx:-25px;--ty:20px"></div>
+    <div class="i-particle" style="width:150px;height:150px;top:50%;left:50%;background:radial-gradient(circle,rgba(255,184,0,.08),transparent 65%);--dur:4s;--del:-1s;--tx:15px;--ty:-40px"></div>
+
+    <!-- 3D spinning rings -->
+    <div class="ring-wrap">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+
+      <!-- Orbiting food emojis on the rings -->
+      <div class="orbiters" id="orbiters"></div>
+    </div>
+
+    <!-- Center text -->
+    <div class="intro-center">
+      <div class="intro-tagline">Flavours</div>
+      <div class="intro-sub">Heritage · Culture · Tradition</div>
+      <div class="intro-bar"></div>
+      <div class="intro-enter">
+        <button onclick="dismissIntro()"><span>Enter the Kitchen →</span></button>
+      </div>
+    </div>
+
+    <!-- Progress ring at bottom -->
+    <div class="progress-ring">
+      <svg width="42" height="42" viewBox="0 0 42 42">
+        <circle cx="21" cy="21" r="18" fill="none" stroke="rgba(255,140,0,.15)" stroke-width="2"/>
+        <circle class="progress-circle" cx="21" cy="21" r="18" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     LOGIN GATE
+══════════════════════════ -->
+<div id="gate">
+  <!-- LEFT panel -->
+  <div class="gate-l">
+    <div class="gblob"></div><div class="gblob"></div><div class="gblob"></div>
+    <div class="gate-mandala">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="rgba(255,140,0,1)">
+        <circle cx="200" cy="200" r="185" stroke-width=".5"/><circle cx="200" cy="200" r="155" stroke-width=".4"/>
+        <circle cx="200" cy="200" r="125" stroke-width=".4"/><circle cx="200" cy="200" r="95" stroke-width=".4"/>
+        <circle cx="200" cy="200" r="65" stroke-width=".4"/><circle cx="200" cy="200" r="35" stroke-width=".4"/>
+        <line x1="15" y1="200" x2="385" y2="200" stroke-width=".35"/><line x1="200" y1="15" x2="200" y2="385" stroke-width=".35"/>
+        <line x1="69" y1="69" x2="331" y2="331" stroke-width=".3"/><line x1="331" y1="69" x2="69" y2="331" stroke-width=".3"/>
+        <polygon points="200,22 374,138 374,262 200,378 26,262 26,138" stroke-width=".55"/>
+        <polygon points="200,66 342,151 342,249 200,334 58,249 58,151" stroke-width=".35"/>
+        <polygon points="200,108 308,164 308,236 200,292 92,236 92,164" stroke-width=".25"/>
+      </svg>
+    </div>
+    <div class="gate-brand">
+      <div class="gate-logo">🍛</div>
+      <div class="gate-hl">Where <em>Flavours</em><br/>Meet Fresh<br/>Tradition</div>
+      <p class="gate-tl">120+ heritage dishes, 18 regions, one unforgettable experience. India's culinary soul on a single page.</p>
+    </div>
+    <div class="gate-stats">
+      <div class="gstat"><div class="gs-n">120+</div><div class="gs-l">Heritage Dishes</div></div>
+      <div class="gstat"><div class="gs-n">18</div><div class="gs-l">Regions</div></div>
+      <div class="gstat"><div class="gs-n">4.9★</div><div class="gs-l">Avg Rating</div></div>
+    </div>
+    <div class="gate-q" style="margin-top:32px">
+      <p>"Every dish here carries the weight of centuries — I tasted history itself."</p>
+      <div class="qa">— Priya Menon, Food Critic</div>
+    </div>
+  </div>
+
+  <!-- RIGHT — Auth Form -->
+  <div class="gate-r">
+    <div class="gate-fh">
+      <h2 id="gtit">Welcome Back</h2>
+      <p id="gsub">Sign in to begin your culinary journey</p>
+    </div>
+    <div class="atabs" id="atabs">
+      <button class="atab on" onclick="gTab('login',this)">Sign In</button>
+      <button class="atab" onclick="gTab('register',this)">Create Account</button>
+    </div>
+    <!-- LOGIN -->
+    <div class="apanel vis" id="gLP">
+      <div class="fg">
+        <label>Email Address</label>
+        <div class="fw"><span class="fi">✉️</span>
+          <input type="email" id="glE" placeholder="you@example.com" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()">
+        </div><span class="ferr" id="glEE"></span>
+      </div>
+      <div class="fg">
+        <label>Password</label>
+        <div class="fw"><span class="fi">🔒</span>
+          <input type="password" id="glP" placeholder="Min. 6 characters" onkeydown="if(event.key==='Enter')doLogin()">
+          <button class="eye" onclick="tpw('glP','glEy')" tabindex="-1"><span id="glEy">👁</span></button>
+        </div><span class="ferr" id="glPE"></span>
+      </div>
+      <div class="frow">
+        <label class="chk"><input type="checkbox" id="glR"> <span>Remember me</span></label>
+        <button class="lnk" onclick="gTab('forgot',null)">Forgot password?</button>
+      </div>
+      <button class="gsub" id="loginBtn" onclick="doLogin()"><span>Enter the Kitchen →</span></button>
+      <div class="aor"><span>or continue with</span></div>
+      <div class="socrow">
+        <button class="socbtn" onclick="doSoc('Google')"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="G"> Google</button>
+        <button class="socbtn" onclick="doSoc('GitHub')"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GH"> GitHub</button>
+      </div>
+      <p class="asw">New here? <button onclick="gTab('register',document.querySelectorAll('.atab')[1])">Create an account →</button></p>
+    </div>
+    <!-- REGISTER -->
+    <div class="apanel" id="gRP">
+      <div class="fg"><label>Full Name</label><div class="fw"><span class="fi">👤</span><input type="text" id="grN" placeholder="Your full name"></div><span class="ferr" id="grNE"></span></div>
+      <div class="fg"><label>Email Address</label><div class="fw"><span class="fi">✉️</span><input type="email" id="grE" placeholder="you@example.com"></div><span class="ferr" id="grEE"></span></div>
+      <div class="fg"><label>Password</label><div class="fw"><span class="fi">🔒</span><input type="password" id="grP" placeholder="Min. 6 characters" oninput="pwStr(this.value)"><button class="eye" onclick="tpw('grP','grEy')" tabindex="-1"><span id="grEy">👁</span></button></div><div class="pstr"><div class="pbar" id="pbar"></div></div><span class="ferr" id="grPE"></span></div>
+      <div class="fg"><label>Confirm Password</label><div class="fw"><span class="fi">🔒</span><input type="password" id="grC" placeholder="Repeat password" onkeydown="if(event.key==='Enter')doReg()"><button class="eye" onclick="tpw('grC','grCy')" tabindex="-1"><span id="grCy">👁</span></button></div><span class="ferr" id="grCE"></span></div>
+      <button class="gsub" id="regBtn" onclick="doReg()"><span>Join the Tradition →</span></button>
+      <p class="asw">Have an account? <button onclick="gTab('login',document.querySelectorAll('.atab')[0])">Sign in →</button></p>
+    </div>
+    <!-- FORGOT -->
+    <div class="apanel" id="gFP">
+      <div class="fg"><label>Email Address</label><div class="fw"><span class="fi">✉️</span><input type="email" id="gfE" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doFgt()"></div><span class="ferr" id="gfEE"></span></div>
+      <button class="gsub" id="fgtBtn" onclick="doFgt()"><span>Send Reset Link →</span></button>
+      <p class="asw">Remembered? <button onclick="gTab('login',document.querySelectorAll('.atab')[0])">← Back to Sign In</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     MAIN APP
+══════════════════════════ -->
+<div id="app">
+
+<!-- NAV -->
+<nav id="mn">
+  <a class="nav-logo" href="#">
+    <div class="nav-li">🍛</div>
+    <span class="nav-lt">Flavours</span>
+  </a>
+  <div class="nav-links">
+    <a href="#regions">Regions</a>
+    <a href="#menu">Menu</a>
+    <a href="#festivals">Festivals</a>
+    <a href="#mood">Mood</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-act">
+    <div class="nav-user"><span>👤</span><span id="navUN">Guest</span></div>
+    <button class="cart-btn" onclick="togCart()">🛒<span class="cbadge" id="cbadge">0</span></button>
+    <button class="logout-btn" onclick="doLogout()">Sign out</button>
+    <button class="logout-btn" style="background:rgba(255,140,0,.08);border-color:var(--border);color:var(--amber)" onclick="openHist()">📋 Orders</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mwrap">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="rgba(255,140,0,1)">
+      <circle cx="200" cy="200" r="180" stroke-width=".5"/><circle cx="200" cy="200" r="148" stroke-width=".4"/>
+      <circle cx="200" cy="200" r="118" stroke-width=".4"/><circle cx="200" cy="200" r="88" stroke-width=".4"/>
+      <circle cx="200" cy="200" r="58" stroke-width=".4"/><line x1="20" y1="200" x2="380" y2="200" stroke-width=".4"/>
+      <line x1="200" y1="20" x2="200" y2="380" stroke-width=".4"/>
+      <polygon points="200,28 372,140 372,260 200,372 28,260 28,140" stroke-width=".58"/>
+    </svg>
+  </div>
+  <div class="hero-cnt reveal">
+    <div class="hero-tag"><span class="pdot"></span>Live Orders Open · 10am–11pm</div>
+    <h1 class="ht">Where <em>Flavours</em><br/><span>Meet Fresh Tradition<span class="htul"></span></span></h1>
+    <p class="hsub">An immersive cultural dining experience. The stories, heritage and soul behind every dish — from the Himalayas to the Malabar Coast.</p>
+    <div class="hero-cta">
+      <button class="btn-p" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})"><span>Explore Menu →</span></button>
+      <button class="btn-g" onclick="document.getElementById('regions').scrollIntoView({behavior:'smooth'})">Browse Regions</button>
+    </div>
+    <div class="hstats">
+      <div><div class="snum" data-count="120">0</div><div class="slbl">Heritage Dishes</div></div>
+      <div><div class="snum" data-count="18">0</div><div class="slbl">Regions</div></div>
+      <div><div class="snum">4.9★</div><div class="slbl">Rating</div></div>
+    </div>
+  </div>
+  <div class="hero-vis reveal" style="transition-delay:.2s">
+    <div class="hcard">
+      <div class="hdi"><span class="hdi-em">🍛</span></div>
+      <div class="hci">
+        <div class="hci-nm">Dal Baati Churma</div>
+        <div class="hci-ds">Rajasthani · Heritage Platter · Chef's Favourite</div>
+        <div class="hci-ft">
+          <span class="hci-pr">₹349</span>
+          <button class="btn-add" onclick="addToCartDirect('Dal Baati Churma','🍛',349,'Rajasthani')">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="hfloats">
+      <div class="hfc"><div class="hfc-ic" style="background:rgba(255,140,0,.12)">🕐</div><div><div class="hfc-lb">Prep Time</div><div class="hfc-vl">25 min</div></div></div>
+      <div class="hfc"><div class="hfc-ic" style="background:rgba(76,175,80,.1)">🌿</div><div><div class="hfc-lb">Cuisine</div><div class="hfc-vl">Authentic</div></div></div>
+      <div class="hfc"><div class="hfc-ic" style="background:rgba(255,69,0,.1)">🔥</div><div><div class="hfc-lb">Spice</div><div class="hfc-vl">Medium</div></div></div>
+      <div class="hfc"><div class="hfc-ic" style="background:rgba(255,184,0,.1)">⭐</div><div><div class="hfc-lb">Best Seller</div><div class="hfc-vl">4.9 / 5</div></div></div>
+    </div>
+  </div>
+
+  <!-- Scrolling strip -->
+  <div class="hero-strip">
+    <span class="strip-label">Now Trending ·</span>
+    <div class="strip-scroller">
+      <span>🍗 Butter Chicken</span><span>🍚 Hyderabadi Biryani</span><span>🥙 Masala Dosa</span>
+      <span>🍮 Rasgulla</span><span>🥟 Momos</span><span>🦐 Prawn Moilee</span>
+      <span>🫘 Dal Makhani</span><span>🥩 Rogan Josh</span><span>🍜 Thukpa</span>
+      <span>🍗 Butter Chicken</span><span>🍚 Hyderabadi Biryani</span><span>🥙 Masala Dosa</span>
+      <span>🍮 Rasgulla</span><span>🥟 Momos</span><span>🦐 Prawn Moilee</span>
+      <span>🫘 Dal Makhani</span><span>🥩 Rogan Josh</span><span>🍜 Thukpa</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section id="featured">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Why Choose Us</div>
+    <h2 class="sec-t">The <em>Flavours</em> Difference</h2>
+    <p class="sec-d">We don't just serve food — we serve stories, heritage, and experiences that transcend time.</p>
+  </div>
+  <div class="feat-grid reveal">
+    <div class="feat-item">
+      <span class="feat-icon">🗺️</span>
+      <div class="feat-label">Authenticity</div>
+      <div class="feat-title">Rooted in Heritage</div>
+      <div class="feat-desc">Every recipe traced back to its origin, verified with culinary historians and regional chefs.</div>
+      <div class="feat-num">01</div>
+    </div>
+    <div class="feat-item">
+      <span class="feat-icon">👨‍🍳</span>
+      <div class="feat-label">Craft</div>
+      <div class="feat-title">Master Chef Network</div>
+      <div class="feat-desc">Partnered with 60+ regional specialty chefs who have trained for decades in their craft.</div>
+      <div class="feat-num">02</div>
+    </div>
+    <div class="feat-item">
+      <span class="feat-icon">📖</span>
+      <div class="feat-label">Storytelling</div>
+      <div class="feat-title">Every Dish Has a Tale</div>
+      <div class="feat-desc">Explore the mythology, history, and cultural context behind each dish on our menu.</div>
+      <div class="feat-num">03</div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIONS -->
+<section id="regions">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Explore by Culture</div>
+    <h2 class="sec-t" style="color:var(--cream)">A Journey Across <em>Regions</em></h2>
+    <p class="sec-d" style="color:var(--muted)">From spice routes of the South to buttery breads of the North — each region tells a unique culinary story.</p>
+  </div>
+  <div class="rgrid stg">
+    <div class="rcard" onclick="filterByRegion('North Indian')"><div class="rbg north"><span class="re">🫓</span></div><div class="rov"><div class="rn">North India</div><div class="rd">Curries, Breads & Kebabs</div><div class="rtag">24 Dishes</div></div></div>
+    <div class="rcard" onclick="filterByRegion('South Indian')"><div class="rbg south"><span class="re">🥘</span></div><div class="rov"><div class="rn">South India</div><div class="rd">Rice, Dosas & Chutneys</div><div class="rtag">28 Dishes</div></div></div>
+    <div class="rcard" onclick="filterByRegion('East Indian')"><div class="rbg east"><span class="re">🐟</span></div><div class="rov"><div class="rn">East India</div><div class="rd">Fish Curries & Sweets</div><div class="rtag">18 Dishes</div></div></div>
+    <div class="rcard" onclick="filterByRegion('West Indian')"><div class="rbg west"><span class="re">🌶️</span></div><div class="rov"><div class="rn">West India</div><div class="rd">Dhokla, Thepla & Vada Pav</div><div class="rtag">22 Dishes</div></div></div>
+    <div class="rcard" onclick="filterByRegion('Coastal')"><div class="rbg coastal"><span class="re">🦐</span></div><div class="rov"><div class="rn">Coastal</div><div class="rd">Seafood & Coconut Curries</div><div class="rtag">16 Dishes</div></div></div>
+    <div class="rcard" onclick="filterByRegion('Himalayan')"><div class="rbg himalayan"><span class="re">🍜</span></div><div class="rov"><div class="rn">Himalayan</div><div class="rd">Momos, Thukpa & Pickles</div><div class="rtag">12 Dishes</div></div></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Our Story Menu</div>
+    <h2 class="sec-t">Dishes With <em>Heritage</em></h2>
+    <p class="sec-d">Every dish comes with its story — its origin, its festival, its legend.</p>
+  </div>
+  <div class="mfilter reveal" id="mfilter">
+    <button class="fbtn on" onclick="filterMenu('all',this)">All Dishes</button>
+    <button class="fbtn" onclick="filterMenu('veg',this)">🌿 Vegetarian</button>
+    <button class="fbtn" onclick="filterMenu('nonveg',this)">🍗 Non-Veg</button>
+    <button class="fbtn" onclick="filterMenu('North Indian',this)">North Indian</button>
+    <button class="fbtn" onclick="filterMenu('South Indian',this)">South Indian</button>
+    <button class="fbtn" onclick="filterMenu('East Indian',this)">East Indian</button>
+    <button class="fbtn" onclick="filterMenu('West Indian',this)">West Indian</button>
+    <button class="fbtn" onclick="filterMenu('Coastal',this)">Coastal</button>
+    <button class="fbtn" onclick="filterMenu('Himalayan',this)">Himalayan</button>
+  </div>
+  <div class="mgrid" id="mgrid"></div>
+</section>
+
+<!-- FESTIVALS -->
+<section id="festivals">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Seasonal Specials</div>
+    <h2 class="sec-t" style="color:var(--cream)">Festival <em>Menus</em></h2>
+    <p class="sec-d" style="color:var(--muted)">Celebrating culture through food — our menus change with every festival.</p>
+  </div>
+  <div class="ftabs reveal" id="ftabs"></div>
+  <div id="fcont"></div>
+</section>
+
+<!-- MOOD -->
+<section id="mood">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Personalised Picks</div>
+    <h2 class="sec-t">Tell Us Your <em>Mood</em></h2>
+    <p class="sec-d">Not sure what to order? Let your mood guide you to the perfect dish.</p>
+  </div>
+  <div class="mgd stg" id="mgd"></div>
+  <div class="mres" id="mres"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Simple & Fast</div>
+    <h2 class="sec-t">How It <em>Works</em></h2>
+    <p class="sec-d">From discovery to delivery in four simple steps.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step"><div class="stepn">1</div><span class="stepic">🔍</span><h3 class="stept">Explore</h3><p class="stepd">Browse by region, festival, or mood to discover dishes rooted in culture.</p></div>
+    <div class="step"><div class="stepn">2</div><span class="stepic">📖</span><h3 class="stept">Discover</h3><p class="stepd">Read the story behind each dish — its history, heritage, and why it matters.</p></div>
+    <div class="step"><div class="stepn">3</div><span class="stepic">🛒</span><h3 class="stept">Order</h3><p class="stepd">Add items to your cart and place your order with one tap.</p></div>
+    <div class="step"><div class="stepn">4</div><span class="stepic">🍽️</span><h3 class="stept">Savour</h3><p class="stepd">Your food freshly prepared and delivered — hot and authentic.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">What People Say</div>
+    <h2 class="sec-t">Loved by <em>Food Lovers</em></h2>
+    <p class="sec-d">Real reviews from real customers who experienced the magic of our kitchen.</p>
+  </div>
+  <div class="tgrid stg">
+    <div class="tcard">
+      <div class="tquote">"</div>
+      <div class="tbody">The Hyderabadi Biryani was unlike anything I've ever had. Each grain of rice was infused with 200 years of history. Absolutely stunning.</div>
+      <div class="tauthor">
+        <div class="tav">👩</div>
+        <div><div class="tstars">★★★★★</div><div class="tan">Priya Menon</div><div class="tar">Food Critic, Chennai</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tquote">"</div>
+      <div class="tbody">I ordered Dal Makhani during a nostalgic moment. It tasted exactly like my grandmother's recipe. The authentic flavours took me back to my roots.</div>
+      <div class="tauthor">
+        <div class="tav">👨</div>
+        <div><div class="tstars">★★★★★</div><div class="tan">Arjun Sharma</div><div class="tar">Software Engineer, Bengaluru</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tquote">"</div>
+      <div class="tbody">The festival menus are genius. Ordered the full Onam Sadya set and my whole family was transported to Kerala. Outstanding authenticity!</div>
+      <div class="tauthor">
+        <div class="tav">👩</div>
+        <div><div class="tstars">★★★★★</div><div class="tan">Kavitha Nair</div><div class="tar">Home Chef, Kochi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-hd reveal">
+    <div class="eyebrow">Get in Touch</div>
+    <h2 class="sec-t" style="color:var(--cream)">We'd Love to <em>Hear</em> From You</h2>
+    <p class="sec-d" style="color:var(--muted)">Reservations, feedback, or curious about a dish?</p>
+  </div>
+  <div class="cgrid reveal">
+    <div class="cinfo">
+      <h3>Visit or Write to Us</h3>
+      <p>Experience the warmth of our kitchen. Whether planning a visit or asking a question — we reply within 24 hours.</p>
+      <div class="cdet"><div class="cic">📍</div><div><div class="clb">Address</div><div class="cvl">12 Heritage Lane, Banjara Hills, Hyderabad</div></div></div>
+      <div class="cdet"><div class="cic">📞</div><div><div class="clb">Phone</div><div class="cvl">+91 98765 43210</div></div></div>
+      <div class="cdet"><div class="cic">📧</div><div><div class="clb">Email</div><div class="cvl"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d75787171725d7b717c6b72686f6e337473">[email&#160;protected]</a></div></div></div>
+      <div class="cdet"><div class="cic">🕐</div><div><div class="clb">Hours</div><div class="cvl">Mon–Sun · 10:00 AM – 11:00 PM</div></div></div>
+    </div>
+    <div class="cform">
+      <div class="fgrow">
+        <div class="fg2"><label>Your Name</label><input type="text" id="cN" placeholder="Full name"></div>
+        <div class="fg2"><label>Email</label><input type="email" id="cE" placeholder="you@example.com"></div>
+      </div>
+      <div class="fg2" style="margin-bottom:14px"><label>Subject</label>
+        <select id="cS"><option value="">Select a topic…</option><option>Table Reservation</option><option>Order Issue</option><option>Feedback</option><option>Partnership</option><option>Other</option></select>
+      </div>
+      <div class="fg2" style="margin-bottom:0"><label>Message</label><textarea id="cM" placeholder="Tell us anything…"></textarea></div>
+      <button class="btn-ct" onclick="submitContact()">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fgrid">
+    <div class="fbrand">
+      <div class="fblogo"><div class="fbli">🍛</div><div class="fblt">Flavours</div></div>
+      <p>A cultural dining platform bridging technology and tradition — immersive experiences rooted in heritage.</p>
+    </div>
+    <div class="fcol"><h4>Explore</h4><ul><li><a href="#regions">By Region</a></li><li><a href="#festivals">Festivals</a></li><li><a href="#mood">Mood Picks</a></li><li><a href="#menu">Full Menu</a></li></ul></div>
+    <div class="fcol"><h4>Company</h4><ul><li><a href="#contact">About Us</a></li><li><a href="#contact">Our Chefs</a></li><li><a href="#contact">Careers</a></li><li><a href="#contact">Blog</a></li></ul></div>
+    <div class="fcol"><h4>Contact</h4><ul><li><a href="#contact">Support</a></li><li><a href="#contact">Feedback</a></li><li><a href="#contact">Partner With Us</a></li><li><a href="#contact">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 Flavours — Where Tradition Meets Fire. All rights reserved.</p>
+    <div class="socials"><div class="soc">📘</div><div class="soc">📸</div><div class="soc">🐦</div><div class="soc">▶️</div></div>
+  </div>
+</footer>
+
+</div><!-- end #app -->
+
+<!-- CART -->
+<div class="cart-ov" id="cov" onclick="togCart()"></div>
+<div class="cart-pan" id="cpan">
+  <div class="cart-hd"><div><h2>Your Order</h2><div style="font-size:.68rem;color:rgba(255,248,240,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:3px">Cultural Feast in Making</div></div><button class="cart-cl" onclick="togCart()">✕</button></div>
+  <div class="cart-bd" id="cbd"></div>
+  <div class="cart-ft" id="cft" style="display:none"><div class="cbr" id="cbr"></div><button class="btn-ck" onclick="checkout()"><span>Place Order →</span></button></div>
+</div>
+
+<!-- DISH MODAL -->
+<div class="moverlay" id="dmod" onclick="closeDM(event)"><div class="mbox" id="dbox"></div></div>
+
+<!-- ORDER MODAL -->
+<div class="moverlay order-modal" id="omod" onclick="closeOM(event)"><div class="mbox" id="obox"></div></div>
+
+<!-- HISTORY MODAL -->
+<div class="hov" id="hmod" onclick="closeHist2(event)">
+  <div class="hpan">
+    <div class="hhd"><div><h2>Order History</h2><p id="hsub">Your culinary journey</p></div><button class="hcls" onclick="closeHist()">✕</button></div>
+    <div class="hbdy" id="hbdy"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
